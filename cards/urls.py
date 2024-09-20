@@ -5,5 +5,6 @@ app_name = "cards"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("servers/", views.servers, name="servers")
+    path("servers/", views.servers, name="servers"),
+    path("servers/new_server/", views.new_server, name="new_server"),
 ]

@@ -1,34 +1,34 @@
 {% extends "cards/base.html" %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <div>
-            <ul>
-                {% for server in servers %}
-                        <li>
-                            <p>
-                                {{ server.name }}
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                {{ server.ip }}
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                {{ server.up_date_time }}
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                {{ server.is_online }}
-                            </p>
-                        </li>
-                {% empty %}
-                    <li>No blogs available ¯\_(ツ)_/¯</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+    <div>
+        <ul>
+            {% for server in servers %}
+                    <li>
+                        <p>
+                            {{ server.name }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{ server.ip }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{ server.up_date_time }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{ server.is_online }}
+                        </p>
+                    </li>
+                    <br>
+            {% empty %}
+                <li>No servers available ¯\_(ツ)_/¯</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'cards:new_server' %}">Add a new server</a>
+    </div>
 {% endblock content %}
