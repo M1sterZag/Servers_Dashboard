@@ -1,0 +1,12 @@
+{% extends "cards/base.html" %}
+{% block content %}
+    <h2>Edit server</h2>
+    <p>
+      {{ server.name }}
+    </p>
+      <form action="{% url 'cards:edit_server' card.id %}" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Save changes</button>
+      </form>
+{% endblock content %}

@@ -24,6 +24,7 @@
                             {{ server.is_online }}
                         </p>
                     </li>
+                    <a href="{% url 'cards:edit_server' server.id %}">Edit</a>
                     <a href="{% url 'cards:delete_server' server.id %}">Delete</a>
                     <br>
             {% empty %}

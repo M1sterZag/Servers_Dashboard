@@ -38,3 +38,19 @@ def delete_server(request, server_id):
     if server:
         server.delete()
     return redirect("cards:servers")
+
+
+@login_required
+def edit_server(request, server_id):
+    server = Card.objects.get(id=server_id)
+    if server.owner != request.user:
+        raise Http404
+    if request.method != 'POST':
+        form = CardForm(instance=server)
+    else:
+        form = CardForm(instance=server, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cards:servers')
+    context = {'card': server, 'form': form}
+    return render(request, 'cards/edit_server.html', context)
