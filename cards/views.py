@@ -28,3 +28,13 @@ def new_server(request):
             return redirect('cards:servers')
     context = {'form': form}
     return render(request, 'cards/new_server.html', context)
+
+
+@login_required
+def delete_server(request, server_id):
+    server = Card.objects.get(id=server_id)
+    if server.owner != request.user:
+        raise Http404
+    if server:
+        server.delete()
+    return redirect("cards:servers")
