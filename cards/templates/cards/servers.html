@@ -1,0 +1,32 @@
+{% extends "cards/base.html" %}
+
+{% block content %}
+    <div>
+        <ul>
+            {% for server in servers %}
+                    <li>
+                        <p>
+                            {{ server.name }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{ server.ip }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{ server.up_date_time }}
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            {{ server.is_online }}
+                        </p>
+                    </li>
+            {% empty %}
+                <li>No blogs available ¯\_(ツ)_/¯</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}
