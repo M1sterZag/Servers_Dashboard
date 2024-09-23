@@ -1,4 +1,6 @@
+{% extends "cards/base.html" %}
 {% block content %}
-    <h1>You have been successfully logged out.</h1>
-    <a href="{% url 'users:login' %}">Log in</a>
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 80vh;">
+        <h1 class="mb-4 text-center text-success">You have been successfully logged out.</h1>
+    </div>
 {% endblock content %}

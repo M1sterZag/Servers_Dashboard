@@ -1,9 +1,23 @@
 {% extends "cards/base.html" %}
 
 {% block content %}
-    <form method="post" action="{% url 'users:register' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 80vh;">
+        <h2 class="mb-4 text-center">Register</h2>
+
+        <form method="post" action="{% url 'users:register' %}" class="w-50">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">{{ field.errors|first }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+    </div>
 {% endblock content %}

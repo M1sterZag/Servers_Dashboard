@@ -1,12 +1,17 @@
 {% extends "cards/base.html" %}
+
 {% block content %}
-    <h2>Edit server</h2>
-    <p>
-      {{ server.name }}
-    </p>
-      <form action="{% url 'cards:edit_server' card.id %}" method="POST">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit">Save changes</button>
-      </form>
+    <div class="container py-4">
+        <h2 class="mb-4 text-center">Edit Server</h2>
+        
+        <div class="card p-4 shadow-sm">
+            <p class="font-weight-bold text-secondary mb-3">{{ server.name }}</p>
+            
+            <form action="{% url 'cards:edit_server' card.id %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

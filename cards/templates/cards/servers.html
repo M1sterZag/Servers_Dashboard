@@ -1,36 +1,52 @@
 {% extends "cards/base.html" %}
 
 {% block content %}
-    <div>
-        <ul>
+    <div class="container py-4">
+        <h2 class="mb-4 text-center">Server List</h2>
+
+        <div class="row">
             {% for server in servers %}
-                    <li>
-                        <p>
-                            {{ server.name }}
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            {{ server.ip }}
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            {{ server.up_date_time }}
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            {{ server.is_online }}
-                        </p>
-                    </li>
-                    <a href="{% url 'cards:edit_server' server.id %}">Edit</a>
-                    <a href="{% url 'cards:delete_server' server.id %}">Delete</a>
-                    <br>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ server.name }}</h5>
+                            <p class="card-text"><strong>IP Address:</strong> {{ server.ip }}</p>
+                            <p class="card-text"><strong>Last Updated:</strong> {{ server.up_date_time }}</p>
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="status-indicator 
+                                    {% if server.is_online %}bg-success{% else %}bg-danger{% endif %} mr-2">
+                                </span>
+                                <span>{{ server.is_online|yesno:"Online,Offline" }}</span>
+                            </div>
+                            <a href="{% url 'cards:edit_server' server.id %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'cards:delete_server' server.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
             {% empty %}
-                <li>No servers available ¯\_(ツ)_/¯</li>
+                <div class="col-12">
+                    <p class="text-center text-muted">No servers available ¯\_(ツ)_/¯</p>
+                </div>
             {% endfor %}
-        </ul>
-        <a href="{% url 'cards:new_server' %}">Add a new server</a>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'cards:new_server' %}" class="btn btn-primary">Add a New Server</a>
+        </div>
     </div>
+
+    <style>
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .bg-success {
+            background-color: #28a745;
+        }
+        .bg-danger {
+            background-color: #dc3545;
+        }
+    </style>
 {% endblock content %}

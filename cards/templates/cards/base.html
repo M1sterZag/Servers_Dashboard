@@ -4,25 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servers Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+        .sidebar .username {
+            padding: 10px 15px;
+        }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>
-        <a href="{% url 'cards:index' %}">Home</a> -  
-        <a href="{% url 'cards:servers' %}">Servers</a>
-    </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar Section -->
+            <nav class="col-2 sidebar">
+                <div>
+                    <h4 class="text-center py-3">Dashboard</h4>
+                    <a href="{% url 'cards:index' %}">Home</a>
+                    <a href="{% url 'cards:servers' %}">Servers</a>
+                </div>
+                <div class="username text-center">
+                    {% if user.is_authenticated %}
+                        {{ user.username }}
+                        <form id="logout-form" action="{% url 'users:logout' %}" method="POST" class="text-center">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-btn">Log out</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'users:register' %}">Register</a> -
+                        <a href="{% url 'users:login' %}">Log in</a>
+                    {% endif %}
+                </div>
+            </nav>
+            
+            <!-- Main Content Section -->
+            <main class="col-10">
+                {% block content %}
+                {% endblock content %}
+            </main>
+        </div>
+    </div>
 
-    {% if user.is_authenticated %}
-        Hello, {{ user.username }}.
-        <form id="logout-form" action="{% url 'users:logout' %}" method="POST" class="form-inline">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-        </form>
-    {% else %}
-        <a href="{% url 'users:register' %}">Register</a> -
-        <a href="{% url 'users:login' %}">log in</a>
-    {% endif %}
-    
-    {% block content %}
-    {% endblock content %}    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
