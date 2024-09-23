@@ -5,4 +5,10 @@ from .models import Card
 class CardForm(forms.ModelForm):
     class Meta:
         model = Card
-        fields = ("name", "ip", "is_online", "up_date_time")
+        fields = (
+            "name",
+            "ip",
+            "login",
+            "password",
+            "port",
+            )

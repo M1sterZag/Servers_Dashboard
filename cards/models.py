@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Card(models.Model):
     name = models.CharField(max_length=255)
-    is_online = models.BooleanField()
+    is_online = models.BooleanField(default=False)
     ip = models.GenericIPAddressField()
-    up_date_time = models.DateTimeField()
+    up_date_time = models.DateTimeField(auto_now_add=True)
     port = models.PositiveIntegerField(default=80)
     login = models.CharField(max_length=255)
     password = models.TextField()

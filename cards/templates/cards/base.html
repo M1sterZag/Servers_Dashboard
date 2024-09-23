@@ -26,13 +26,6 @@
         .sidebar .username {
             padding: 10px 15px;
         }
-        .logout-btn {
-            background: none;
-            border: none;
-            color: white;
-            text-decoration: underline;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -42,19 +35,19 @@
             <nav class="col-2 sidebar">
                 <div>
                     <h4 class="text-center py-3">Dashboard</h4>
-                    <a href="{% url 'cards:index' %}">Home</a>
-                    <a href="{% url 'cards:servers' %}">Servers</a>
+                    <a class="text-center mb-1" href="{% url 'cards:index' %}">Home</a>
+                    <a class="text-center" href="{% url 'cards:servers' %}">Servers</a>
                 </div>
                 <div class="username text-center">
                     {% if user.is_authenticated %}
                         {{ user.username }}
-                        <form id="logout-form" action="{% url 'users:logout' %}" method="POST" class="text-center">
+                        <form id="logout-form" action="{% url 'users:logout' %}" method="POST" class="text-center mt-2">
                             {% csrf_token %}
-                            <button type="submit" class="logout-btn">Log out</button>
+                            <button type="submit" class="btn btn-primary">Log out</button>
                         </form>
                     {% else %}
-                        <a href="{% url 'users:register' %}">Register</a> -
-                        <a href="{% url 'users:login' %}">Log in</a>
+                        <a class="btn btn-primary mb-2" href="{% url 'users:register' %}">Register</a>
+                        <a class="btn btn-primary" href="{% url 'users:login' %}">Log in</a>
                     {% endif %}
                 </div>
             </nav>

@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container py-4">
-        <h2 class="mb-4 text-center">Server List</h2>
+        <h2 class="mb-4 text-center">Servers List</h2>
 
         <div class="row">
             {% for server in servers %}
@@ -11,6 +11,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ server.name }}</h5>
                             <p class="card-text"><strong>IP Address:</strong> {{ server.ip }}</p>
+                            <p class="card-text"><strong>Port:</strong> {{ server.port }}</p>
                             <p class="card-text"><strong>Last Updated:</strong> {{ server.up_date_time }}</p>
                             <div class="d-flex align-items-center mb-3">
                                 <span class="status-indicator 
@@ -18,7 +19,7 @@
                                 </span>
                                 <span>{{ server.is_online|yesno:"Online,Offline" }}</span>
                             </div>
-                            <a href="{% url 'cards:edit_server' server.id %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'cards:edit_server' server.id %}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{% url 'cards:delete_server' server.id %}" class="btn btn-sm btn-danger">Delete</a>
                         </div>
                     </div>
@@ -31,7 +32,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="{% url 'cards:new_server' %}" class="btn btn-primary">Add a New Server</a>
+            <a href="{% url 'cards:new_server' %}" class="btn btn-success">Add a New Server</a>
         </div>
     </div>
 
